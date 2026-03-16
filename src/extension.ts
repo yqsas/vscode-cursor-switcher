@@ -1,9 +1,14 @@
 import * as vscode from "vscode";
 import { switchTo } from "./switch";
 
-export function activate(context: vscode.ExtensionContext): void {
+function detectCursorHost(): boolean {
   const appName = vscode.env.appName.toLowerCase();
-  const isCursor = appName.includes("cursor");
+  const uriScheme = vscode.env.uriScheme.toLowerCase();
+  return appName.includes("cursor") || uriScheme === "cursor";
+}
+
+export function activate(context: vscode.ExtensionContext): void {
+  const isCursor = detectCursorHost();
   void vscode.commands.executeCommand("setContext", "switcher.isCursor", isCursor);
 
   const openInCursor = vscode.commands.registerCommand(
