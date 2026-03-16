@@ -1,9 +1,9 @@
 {
-  "name": "vscode-cursor-switcher",
+  "name": "vscode-cursor-switcher-yqsas",
   "displayName": "VSCode Cursor Switcher",
   "description": "Jump between VS Code and Cursor at the same file and position.",
   "version": "0.1.0",
-  "publisher": "your-publisher",
+  "publisher": "yqsas",
   "license": "MIT",
   "repository": {
     "type": "git",
