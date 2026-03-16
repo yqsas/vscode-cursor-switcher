@@ -1,0 +1,90 @@
+{
+  "name": "vscode-cursor-switcher",
+  "displayName": "VSCode Cursor Switcher",
+  "description": "Jump between VS Code and Cursor at the same file and position.",
+  "version": "0.1.0",
+  "publisher": "your-publisher",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yqsas/vscode-cursor-switcher.git"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "cursor",
+    "vscode",
+    "switch",
+    "navigation",
+    "deeplink"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "switcher.openInCursor",
+        "title": "Switch to Cursor",
+        "category": "Switch"
+      },
+      {
+        "command": "switcher.openInVSCode",
+        "title": "Switch to VS Code",
+        "category": "Switch"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "switcher.openInCursor",
+          "when": "resourceScheme == file && !switcher.isCursor",
+          "group": "navigation@-100"
+        },
+        {
+          "command": "switcher.openInVSCode",
+          "when": "resourceScheme == file && switcher.isCursor",
+          "group": "navigation@-100"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "switcher.openInCursor",
+          "when": "explorerResourceIsFolder == false && !switcher.isCursor",
+          "group": "navigation@-100"
+        },
+        {
+          "command": "switcher.openInVSCode",
+          "when": "explorerResourceIsFolder == false && switcher.isCursor",
+          "group": "navigation@-100"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "VSCode Cursor Switcher",
+      "properties": {
+        "switcher.showSuccessMessage": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show a success message after opening the target editor."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish:vscode": "vsce publish",
+    "publish:openvsx": "ovsx publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.5",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^2.32.0",
+    "ovsx": "^0.10.5",
+    "typescript": "^5.6.2"
+  }
+}
